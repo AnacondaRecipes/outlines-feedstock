@@ -16,12 +16,12 @@ build:
 
 requirements:
   host:
-    - python {{ python_min }}
-    - setuptools >=45
-    - setuptools-scm >=6.2
+    - python
+    - setuptools
+    - setuptools-scm
     - pip
   run:
-    - python >={{ python_min }}
+    - python 
     - interegular
     - jinja2
     - lark
@@ -29,7 +29,7 @@ requirements:
     - numpy
     - cloudpickle
     - diskcache
-    - pydantic >=2.0
+    - pydantic
     - referencing
     - jsonschema
     - requests
@@ -38,7 +38,7 @@ requirements:
     - pycountry
     - airportsdata
     - pytorch
-    - outlines-core ==0.1.26
+    - outlines-core
 
 test:
   imports:
