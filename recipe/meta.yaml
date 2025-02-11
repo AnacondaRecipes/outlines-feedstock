@@ -38,7 +38,7 @@ requirements:
     - pycountry
     - airportsdata
     - pytorch
-    - outlines-core
+    - outlines-core >=1.2.26
 
 test:
   imports:
