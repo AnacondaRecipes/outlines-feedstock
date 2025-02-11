@@ -19,6 +19,7 @@ requirements:
     - python
     - setuptools
     - setuptools-scm
+    - setuptools-rust
     - pip
   run:
     - python 
