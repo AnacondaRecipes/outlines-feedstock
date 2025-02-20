@@ -1,13 +1,13 @@
 {% set name = "outlines" %}
-{% set version = "0.1.13" %}
+{% set version = "0.0.43" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/outlines-{{ version }}.tar.gz
-  sha256: 0233cb3ffae9cb6b01ad8d3c32b7d87e3f1cf7bdc7b28a0bc82cd3d277c09bca
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/outlines-{{ version }}.tar.gz
+  sha256: 4a24e853b1d50c61aee76cc45fffc5cf376c10c50caa3b28ebd21fcddc39d83f
 
 build:
   noarch: python
@@ -16,14 +16,17 @@ build:
 
 requirements:
   host:
-    - python
-    - setuptools
-    - setuptools-scm
-    - setuptools-rust
+    - python >=3.8
+    - setuptools >=45
+    - setuptools-scm >=6.2
     - pip
-    - wheel
   run:
-    - python 
+    - datasets
+    - pyairports
+    - pycountry
+    - tqdm
+    - transformers
+    - python >=3.8
     - interegular
     - jinja2
     - lark
@@ -31,16 +34,14 @@ requirements:
     - numpy
     - cloudpickle
     - diskcache
-    - pydantic
+    - pydantic >=2.0
+    - scipy
+    - pytorch >=2.1.0
+    - numba
+    - joblib
     - referencing
     - jsonschema
     - requests
-    - tqdm
-    - typing_extensions
-    - pycountry
-    - airportsdata
-    - pytorch
-    - outlines-core ==0.1.26
 
 test:
   imports:
@@ -48,8 +49,8 @@ test:
   commands:
     - pip check
   requires:
-    - python
     - pip
+
 about:
   home: https://github.com/outlines-dev/outlines
   doc_url: https://outlines-dev.github.io/outlines
@@ -64,5 +65,4 @@ extra:
   recipe-maintainers:
     - ianaobi
   recipe-maintainers:
-    - maresb
     - pavelzw
