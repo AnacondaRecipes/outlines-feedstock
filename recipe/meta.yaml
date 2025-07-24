@@ -1,5 +1,5 @@
 {% set name = "outlines" %}
-{% set version = "0.1.13" %}
+{% set version = "0.1.11" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/outlines-{{ version }}.tar.gz
-  sha256: 0233cb3ffae9cb6b01ad8d3c32b7d87e3f1cf7bdc7b28a0bc82cd3d277c09bca
+  #sha256: 0233cb3ffae9cb6b01ad8d3c32b7d87e3f1cf7bdc7b28a0bc82cd3d277c09bca
 
 build:
   noarch: python
@@ -16,12 +16,12 @@ build:
 
 requirements:
   host:
-    - python {{ python_min }}
+    - python
     - setuptools >=45
     - setuptools-scm >=6.2
     - pip
   run:
-    - python >={{ python_min }}
+    - python
     - interegular
     - jinja2
     - lark
@@ -46,7 +46,7 @@ test:
   commands:
     - pip check
   requires:
-    - python {{ python_min }}
+    - python
     - pip
 
 about:
@@ -57,6 +57,12 @@ about:
   license_file: LICENSE
 
 extra:
+  anaconda-services:
+    ref: https://anaconda.zendesk.com/agent/tickets/49522
+    reason: Dependency for vllm
+    recipe-maintainers:
+      - ianaobi
+      - bkreider
   recipe-maintainers:
     - maresb
     - pavelzw
