@@ -1,5 +1,5 @@
 {% set name = "outlines" %}
-{% set version = "0.1.11" %}
+{% set version = "1.2.9" %}
 
 package:
   name: {{ name|lower }}
@@ -10,7 +10,8 @@ source:
   #sha256: 0233cb3ffae9cb6b01ad8d3c32b7d87e3f1cf7bdc7b28a0bc82cd3d277c09bca
 
 build:
-  noarch: python
+  skip: true # [ py<310 or py>312]
+  #noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
 
@@ -38,7 +39,10 @@ requirements:
     - pycountry
     - airportsdata
     - pytorch
-    - outlines-core ==0.1.26
+    - outlines-core =0.2.11
+    - pillow
+    - genson
+    - jsonpath-ng
 
 test:
   imports:
