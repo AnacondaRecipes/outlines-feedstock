@@ -1,5 +1,5 @@
 {% set name = "outlines" %}
-{% set version = "0.1.13" %}
+{% set version = "0.1.11" %}
 
 package:
   name: {{ name|lower }}
@@ -7,21 +7,24 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/outlines-{{ version }}.tar.gz
-  sha256: 0233cb3ffae9cb6b01ad8d3c32b7d87e3f1cf7bdc7b28a0bc82cd3d277c09bca
+  sha256: 0997bd9da1cc050e430bd08995dc7d4bd855918bafa4531e49d3f37110a23aba
 
 build:
-  noarch: python
+  skip: true # [ py<310 ]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python {{ python_min }}
+    - python
     - setuptools >=45
     - setuptools-scm >=6.2
     - pip
+    - wheel
+
+    - pytorch
   run:
-    - python >={{ python_min }}
+    - python
     - interegular
     - jinja2
     - lark
@@ -38,7 +41,7 @@ requirements:
     - pycountry
     - airportsdata
     - pytorch
-    - outlines-core ==0.1.26
+    - outlines-core =0.1.26
 
 test:
   imports:
@@ -46,15 +49,21 @@ test:
   commands:
     - pip check
   requires:
-    - python {{ python_min }}
+    - python
     - pip
 
 about:
-  home: https://github.com/outlines-dev/outlines
-  doc_url: https://outlines-dev.github.io/outlines
-  summary: Probabilistic Generative Model Programming
+  home: https://dottxt-ai.github.io/outlines/latest/
+  summary: Outlines guarantees structured outputs during generation
+  description: |
+    LLMs are powerful but their outputs are unpredictable. Most solutions attempt to fix bad 
+    outputs after generation using parsing, regex, or fragile code that breaks easily.
+
+    Outlines guarantees structured outputs during generation — directly from any LLM.
   license: Apache-2.0
   license_file: LICENSE
+  doc_url: https://dottxt-ai.github.io/outlines/latest/
+  dev_url: https://github.com/dottxt-ai/outlines
 
 extra:
   recipe-maintainers:
