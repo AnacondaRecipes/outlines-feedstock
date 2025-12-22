@@ -2,3 +2,4 @@
 channels:
   - https://staging.continuum.io/preprod-pbp/fs/airportsdata-feedstock/pr2/6cf6f29
   - https://staging.continuum.io/preprod-pbp/fs/outlines-core-feedstock/pr2/44c57b4
+  - https://staging.continuum.io/pbp/fs/interegular-feedstock/pr2/6100888
