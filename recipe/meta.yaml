@@ -12,7 +12,7 @@ source:
 build:
   skip: true # [ py<310 ]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 1
+  number: 0
 
 requirements:
   host:
@@ -21,8 +21,7 @@ requirements:
     - setuptools-scm >=6.2
     - pip
     - wheel
-
-    - pytorch
+    - pytorch =={{ pytorch }}
   run:
     - python
     - interegular
@@ -49,7 +48,6 @@ test:
   commands:
     - pip check
   requires:
-    - python
     - pip
 
 about:
@@ -62,6 +60,7 @@ about:
     Outlines guarantees structured outputs during generation — directly from any LLM.
   license: Apache-2.0
   license_file: LICENSE
+  license_family: Apache
   doc_url: https://dottxt-ai.github.io/outlines/latest/
   dev_url: https://github.com/dottxt-ai/outlines
 
