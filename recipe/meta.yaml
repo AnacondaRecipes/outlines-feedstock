@@ -21,7 +21,7 @@ requirements:
     - setuptools-scm >=6.2
     - pip
     - wheel
-    - pytorch =={{ pytorch }}
+    - pytorch {{ pytorch }}
   run:
     - python
     - interegular
@@ -40,7 +40,7 @@ requirements:
     - pycountry
     - airportsdata
     - pytorch
-    - outlines-core =0.1.26
+    - outlines-core 0.1.26
 
 test:
   imports:
@@ -51,7 +51,7 @@ test:
     - pip
 
 about:
-  home: https://dottxt-ai.github.io/outlines/latest/
+  home: https://dottxt-ai.github.io/outlines/
   summary: Outlines guarantees structured outputs during generation
   description: |
     LLMs are powerful but their outputs are unpredictable. Most solutions attempt to fix bad 
@@ -61,7 +61,7 @@ about:
   license: Apache-2.0
   license_file: LICENSE
   license_family: Apache
-  doc_url: https://dottxt-ai.github.io/outlines/latest/
+  doc_url: https://dottxt-ai.github.io/outlines/
   dev_url: https://github.com/dottxt-ai/outlines
 
 extra:
