@@ -1,5 +1,5 @@
 {% set name = "outlines" %}
-{% set version = "0.1.11" %}
+{% set version = "1.2.12" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/outlines-{{ version }}.tar.gz
-  sha256: 0997bd9da1cc050e430bd08995dc7d4bd855918bafa4531e49d3f37110a23aba
+  sha256: 7aa3a49b8c75e94ec6f6194ff7ab47fcc57bff3a38590590c4003fbba9354fdd
 
 build:
-  skip: true # [py<310]
+  skip: true  # [py<310]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
 
@@ -20,7 +20,6 @@ requirements:
     - setuptools >=45
     - setuptools-scm >=6.2
     - pip
-    - wheel
     - pytorch {{ pytorch }}
   run:
     - python
@@ -40,7 +39,10 @@ requirements:
     - pycountry
     - airportsdata
     - pytorch
-    - outlines-core ==0.1.26
+    - outlines-core ==0.2.14
+    - pillow
+    - genson
+    - jsonpath-ng
 
 test:
   imports:
@@ -54,7 +56,7 @@ about:
   home: https://dottxt-ai.github.io/outlines/
   summary: Outlines guarantees structured outputs during generation
   description: |
-    LLMs are powerful but their outputs are unpredictable. Most solutions attempt to fix bad 
+    LLMs are powerful but their outputs are unpredictable. Most solutions attempt to fix bad
     outputs after generation using parsing, regex, or fragile code that breaks easily.
 
     Outlines guarantees structured outputs during generation — directly from any LLM.
