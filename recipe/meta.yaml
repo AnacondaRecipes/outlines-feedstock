@@ -16,6 +16,8 @@
   "--ignore=tests/models/test_openai.py",
   "--ignore=tests/models/test_provider_exceptions.py",
   "--ignore=tests/models/test_llamacpp_type_adapter.py",
+  "--ignore=tests/models/test_transformers_multimodal.py",  # fails on linux: OneDNN CPU emulation error
+  "--ignore=tests/backends/test_llguidance.py",             # fails on win: corrupted GGUF cache
   "--deselect=tests/models/test_transformers_multimodal_type_adapter.py::test_transformers_multimodal_type_adapter_format_output_type",
   "--deselect=tests/models/test_transformers_type_adapter.py::test_transformers_type_adapter_format_output_type",
   "--deselect=tests/test_generator.py::test_steerable_generator_init_valid_processor",
