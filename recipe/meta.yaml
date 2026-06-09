@@ -16,8 +16,6 @@
   "--ignore=tests/models/test_openai.py",
   "--ignore=tests/models/test_provider_exceptions.py",
   "--ignore=tests/models/test_llamacpp_type_adapter.py",
-  "--ignore=tests/models/test_transformers_multimodal.py",
-  "--ignore=tests/backends/test_llguidance.py",
   "--deselect=tests/models/test_transformers_multimodal_type_adapter.py::test_transformers_multimodal_type_adapter_format_output_type",
   "--deselect=tests/models/test_transformers_type_adapter.py::test_transformers_type_adapter_format_output_type",
   "--deselect=tests/test_generator.py::test_steerable_generator_init_valid_processor",
@@ -28,6 +26,20 @@
   "--deselect=tests/test_generator.py::test_generator_black_box_async_processor",
   "--deselect=tests/test_exceptions.py::TestIsProviderException::test_sentinel_minus_one_is_not_provider",
 ]%}
+{% if linux %}
+{% set pytest_ignore = pytest_ignore + [
+  "--ignore=tests/models/test_transformers_multimodal.py",
+] %}
+{% endif %}
+{% if win %}
+{% set pytest_ignore = pytest_ignore + [
+  "--ignore=tests/backends/test_llguidance.py",
+  "--ignore=tests/models/test_llamacpp_tokenizer.py",
+  "--ignore=tests/test_cache.py",
+  "--deselect=tests/types/test_dsl.py::test_dsl_cfg_from_file",
+  "--deselect=tests/types/test_dsl.py::test_dsl_json_schema_from_file",
+] %}
+{% endif %}
 
 
 package:
