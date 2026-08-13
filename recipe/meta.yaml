@@ -93,7 +93,8 @@ test:
     - anthropic
     - google-genai
     - openai
-    - mistralai
+    # cannot import name 'AssistantMessage' from 'mistralai'
+    - mistralai <2
     - llguidance
     - datasets
 
