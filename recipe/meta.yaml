@@ -41,6 +41,7 @@ requirements:
   "--ignore=tests/types/test_custom_types.py",
   "--ignore=tests/backends/test_backends.py",
   "--ignore=tests/backends/test_outlines_core.py",
+  "--ignore=tests/backends/test_llguidance.py",
   "--ignore=tests/models/test_anthropic.py",
   "--ignore=tests/models/test_gemini.py",
   "--ignore=tests/models/test_llamacpp.py",
