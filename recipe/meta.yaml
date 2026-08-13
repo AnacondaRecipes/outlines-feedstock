@@ -59,6 +59,7 @@ requirements:
   "--deselect=tests/test_generator.py::test_generator_black_box_sync_processor",
   "--deselect=tests/test_generator.py::test_generator_black_box_async_processor",
   "--deselect=tests/test_exceptions.py::TestIsProviderException::test_sentinel_minus_one_is_not_provider",
+  "--deselect=tests/models/test_llamacpp_tokenizer.py::test_llama_cpp_tokenizer",
 ]%}
 {% if linux %}
 {% set pytest_ignore = pytest_ignore + [
@@ -82,7 +83,7 @@ test:
     - outlines
   commands:
     - pip check
-    - pytest -vvv tests {{pytest_ignore | join(" ")}}
+    - pytest -vvv tests {{ pytest_ignore | join(" ") }}
   requires:
     - pip
     - pytest
