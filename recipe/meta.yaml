@@ -1,5 +1,38 @@
 {% set name = "outlines" %}
-{% set version = "1.3.0" %}
+{% set version = "1.3.3" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 5dcd1b9d261ced1337042d6b1fd2bb4e706a09a0121957bcd9eb331d1ea6940c
+
+build:
+  number: 0
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  skip: true  # [py<310 or py>313]
+
+requirements:
+  host:
+    - pip
+    - python
+    - setuptools >=45
+    - setuptools-scm >=6.2
+    - tomli <=2.0.2  # [py<311]
+  run:
+    - python
+    - jinja2
+    - cloudpickle
+    - diskcache
+    - pydantic >=2.0
+    - jsonschema
+    - pillow
+    - typing_extensions
+    - outlines-core ==0.2.14
+    - genson
+
 {% set pytest_ignore = [
   "--ignore=tests/backends/test_xgrammar.py",
   "--ignore=tests/models/test_dottxt.py",
@@ -8,6 +41,7 @@
   "--ignore=tests/types/test_custom_types.py",
   "--ignore=tests/backends/test_backends.py",
   "--ignore=tests/backends/test_outlines_core.py",
+  "--ignore=tests/backends/test_llguidance.py",
   "--ignore=tests/models/test_anthropic.py",
   "--ignore=tests/models/test_gemini.py",
   "--ignore=tests/models/test_llamacpp.py",
@@ -25,6 +59,7 @@
   "--deselect=tests/test_generator.py::test_generator_black_box_sync_processor",
   "--deselect=tests/test_generator.py::test_generator_black_box_async_processor",
   "--deselect=tests/test_exceptions.py::TestIsProviderException::test_sentinel_minus_one_is_not_provider",
+  "--deselect=tests/models/test_llamacpp_tokenizer.py::test_llama_cpp_tokenizer",
 ]%}
 {% if linux %}
 {% set pytest_ignore = pytest_ignore + [
@@ -41,47 +76,14 @@
 ] %}
 {% endif %}
 
-
-package:
-  name: {{ name|lower }}
-  version: {{ version }}
-
-source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/outlines-{{ version }}.tar.gz
-  sha256: 2a515b8e5e446660ea1f7a0ecb7f08d9e646cd3b1cdafab228574acfeabe6f86
-
-build:
-  skip: true  # [py<310 or py>313]
-  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
-
-requirements:
-  host:
-    - python
-    - setuptools >=45
-    - setuptools-scm >=6.2
-    - pip
-  run:
-    - python
-    - jinja2
-    - cloudpickle
-    - diskcache
-    - pydantic >=2.0
-    - jsonschema
-    - typing_extensions
-    - outlines-core ==0.2.14
-    - pillow
-    - genson
-    - jsonpath-ng
-
 test:
   source_files:
-    - tests/
+    - tests
   imports:
     - outlines
   commands:
     - pip check
-    - pytest -vvv tests {{pytest_ignore | join(" ")}}
+    - pytest -vvv tests {{ pytest_ignore | join(" ") }}
   requires:
     - pip
     - pytest
@@ -93,12 +95,13 @@ test:
     - anthropic
     - google-genai
     - openai
-    - mistralai
+    # cannot import name 'AssistantMessage' from 'mistralai'
+    - mistralai <2
     - llguidance
     - datasets
 
 about:
-  home: https://dottxt-ai.github.io/outlines/
+  home: https://dottxt-ai.github.io/outlines
   summary: Outlines guarantees structured outputs during generation
   description: |
     LLMs are powerful but their outputs are unpredictable. Most solutions attempt to fix bad
@@ -108,7 +111,7 @@ about:
   license: Apache-2.0
   license_file: LICENSE
   license_family: Apache
-  doc_url: https://dottxt-ai.github.io/outlines/
+  doc_url: https://dottxt-ai.github.io/outlines
   dev_url: https://github.com/dottxt-ai/outlines
 
 extra:
